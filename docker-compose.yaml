@@ -1,0 +1,15 @@
+version: "3.4"
+
+services:
+  stirling_ag_pdf:
+    image: zorbatherainy/stirling_ag_pdf:${IMAGE_TAG}
+    container_name: stirling_ag_pdf
+    # environment:
+      # - DEEPL_SERVER_URL=http://localhost:8080                            # (optional) The actual StirlingPDF server (default is http://localhost:8080, as this is run inside the same docker)
+      # - CHECK_EVERY_X_MINUTES=2                                           # (optional) How often you want the inputDir scanned for new files
+    volumes:
+      - /etc/localtime:/etc/localtime:ro                             # sync to host time (and avoid the TZ Env variable)
+      - ./dirs/inputDir/:/inputDir
+      - ./dirs/outputDir/:/outputDir
+      - ./dirs/logDir/:/logDir
+    restart: unless-stopped
